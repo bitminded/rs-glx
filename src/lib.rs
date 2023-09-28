@@ -172,3 +172,7 @@ pub fn gl_x_swap_buffers(display: &xlib::DoNotFree<xlib::cdef::Display>, drawabl
         cdef::glXSwapBuffers(display, drawable)
     }
 }
+
+pub fn gl_x_get_current_drawable() -> GLXDrawable {
+    unsafe { cdef::glXGetCurrentDrawable() }
+}

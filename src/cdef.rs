@@ -50,4 +50,5 @@ extern "system" {
         ctx: *mut GLXContext,
     ) -> c_int;
     pub fn glXSwapBuffers(dpy: *mut xlib::cdef::Display, drawable: GLXDrawable);
+    pub fn glXGetCurrentDrawable() -> GLXDrawable;
 }
