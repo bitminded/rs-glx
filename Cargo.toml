@@ -1,0 +1,15 @@
+[package]
+name = "glx"
+version = "0.1.0"
+authors = [ "Michael Graf" ]
+
+[lib]
+name = "glx"
+src = "src/lib.src"
+
+[dependencies]
+xlib = { git = "https://github.com/bitminded/rs-xlib.git" }
+
+[dev-dependencies]
+xcb = { git = "https://github.com/bitminded/rs-xcb.git" }
+xlib_xcb = { package = "xlib-xcb", git = "https://github.com/bitminded/rs-xlib-xcb.git" }
