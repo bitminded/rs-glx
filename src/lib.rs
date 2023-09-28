@@ -165,3 +165,10 @@ pub fn gl_x_make_context_current(
         cdef::glXMakeContextCurrent(display, draw, read, context.data)
     }
 }
+
+pub fn gl_x_swap_buffers(display: &xlib::DoNotFree<xlib::cdef::Display>, drawable: GLXDrawable) {
+    unsafe {
+        let display = &**display as *const xlib::cdef::Display as *mut xlib::cdef::Display;
+        cdef::glXSwapBuffers(display, drawable)
+    }
+}
