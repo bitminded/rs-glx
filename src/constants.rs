@@ -14,3 +14,4 @@ pub const GLX_STENCIL_SIZE: i32 = 13;
 pub const GLX_DOUBLEBUFFER: i32 = 5;
 pub const GLX_VISUAL_ID: i32 = 0x800B;
 pub const GLX_RGBA_TYPE: i32 = 0x8014;
+pub const GLX_COLOR_INDEX_TYPE: i32 = 0x8015;
