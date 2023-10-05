@@ -72,9 +72,8 @@ impl<'a> Drop for GLXFBConfigList<'a> {
     }
 }
 
-pub struct GLXContext<'a> {
+pub struct GLXContext {
     data: *mut cdef::GLXContext,
-    lifetime: std::marker::PhantomData<&'a ()>,
 }
 
 pub fn gl_x_choose_fb_config<'a>(
@@ -104,13 +103,13 @@ pub fn gl_x_get_fb_config_attrib(
     }
 }
 
-pub fn gl_x_create_new_context<'a>(
-    display: &'a xlib::DoNotFree<xlib::cdef::Display>,
+pub fn gl_x_create_new_context(
+    display: &xlib::DoNotFree<xlib::cdef::Display>,
     config: &GLXFBConfig,
     render_type: i32,
-    share_list: Option<&'a GLXContext>,
+    share_list: Option<&GLXContext>,
     direct: bool,
-) -> GLXContext<'a> {
+) -> GLXContext {
     unsafe {
         let display = &**display as *const xlib::cdef::Display as *mut xlib::cdef::Display;
         let direct = if direct { 1 } else { 0 };
@@ -127,10 +126,7 @@ pub fn gl_x_create_new_context<'a>(
                 direct,
             ),
         };
-        GLXContext {
-            data: context,
-            lifetime: std::marker::PhantomData,
-        }
+        GLXContext { data: context }
     }
 }
 
