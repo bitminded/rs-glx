@@ -130,6 +130,39 @@ pub fn gl_x_create_new_context(
     }
 }
 
+pub fn gl_x_create_context_attribs_arb(
+    display: &xlib::DoNotFree<xlib::cdef::Display>,
+    config: &GLXFBConfig,
+    share_context: Option<&GLXContext>,
+    direct: bool,
+    attrib_list: &[i32],
+) -> GLXContext {
+    unsafe {
+        let display = &**display as *const xlib::cdef::Display as *mut xlib::cdef::Display;
+        let direct = if direct { 1 } else { 0 };
+        let context = match share_context {
+            Some(share_context) => {
+                let share_context = share_context.data;
+                cdef::glXCreateContextAttribsARB(
+                    display,
+                    config.data,
+                    share_context,
+                    direct,
+                    attrib_list.as_ptr(),
+                )
+            }
+            None => cdef::glXCreateContextAttribsARB(
+                display,
+                config.data,
+                std::ptr::null_mut(),
+                direct,
+                attrib_list.as_ptr(),
+            ),
+        };
+        GLXContext { data: context }
+    }
+}
+
 // pub fn gl_x_doestroy_context()
 
 pub fn gl_x_create_window(

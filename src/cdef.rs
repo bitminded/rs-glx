@@ -37,6 +37,13 @@ extern "system" {
         share_list: *mut GLXContext,
         direct: c_int,
     ) -> *mut GLXContext;
+    pub fn glXCreateContextAttribsARB(
+        dpy: *mut xlib::cdef::Display,
+        config: *mut GLXFBConfig,
+        share_context: *mut GLXContext,
+        direct: c_int,
+        attrib_list: *const c_int,
+    ) -> *mut GLXContext;
     pub fn glXCreateWindow(
         dpy: *mut xlib::cdef::Display,
         config: *mut GLXFBConfig,
